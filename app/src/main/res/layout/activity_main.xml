@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--标题栏-->
+    <include layout="@layout/titlebar"/>
+
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+    </FrameLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#fff"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <RadioButton
+            android:id="@+id/home_bg"
+            style="@style/button_style_tag"
+            android:drawableTop="@drawable/home_drawable"
+            android:text="首页"/>
+
+        <RadioButton
+            android:id="@+id/wish_bg"
+            style="@style/button_style_tag"
+            android:drawableTop="@drawable/xinyuan_drawable"
+            android:text="心愿单"/>
+
+        <RadioButton
+            android:id="@+id/live_bg"
+            style="@style/button_style_tag"
+            android:drawableTop="@drawable/live_drawable"
+            android:text="生活"/>
+
+        <RadioButton
+            android:id="@+id/my_bg"
+            style="@style/button_style_tag"
+            android:drawableTop="@drawable/my_drawable"
+            android:text="我的"/>
+    </RadioGroup>
+</LinearLayout>
