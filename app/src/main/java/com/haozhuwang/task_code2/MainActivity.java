@@ -2,8 +2,8 @@ package com.haozhuwang.task_code2;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.widget.RadioGroup;
 
@@ -21,6 +21,7 @@ public class MainActivity extends FragmentActivity {
     private RadioGroup mRadioGroup;
     private List<BaseFragment> mBaseFragment;
     private int position;
+    private Fragment mContent;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -60,20 +61,38 @@ public class MainActivity extends FragmentActivity {
                     break;
                 default:
             }
-            BaseFragment fragment=getFragment();
-            switchFragment(fragment);
+            BaseFragment fragmentTo = getFragment();
+            switchFragment(mContent, fragmentTo);
         }
     }
 
-    private void switchFragment(BaseFragment fragment) {
-        //打到管理器
-        FragmentManager sm = getSupportFragmentManager();
-        //开启事务
-        FragmentTransaction bt = sm.beginTransaction();
-        //替换
-        bt.replace(R.id.fl_content,fragment);
-        bt.commit();
-
+    //    private void switchFragment(BaseFragment fragment) {
+//        //打到管理器
+//        FragmentManager sm = getSupportFragmentManager();
+//        //开启事务
+//        FragmentTransaction bt = sm.beginTransaction();
+//        //替换
+//        bt.replace(R.id.fl_content,fragment);
+//        bt.commit();
+//
+//    }
+    private void switchFragment(Fragment from, Fragment to) {
+        if (from != to) {
+            mContent = to;
+            //打到管理器
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            if (!to.isAdded()) {
+                //没有被添加
+                if (to != null) {
+                    ft.add(R.id.fl_content, mContent).commit();
+                }
+            } else {
+                //已经被添加
+                if(!to.isAdded()){
+                    ft.show(mContent).commit();
+                }
+            }
+        }
     }
 
     private void initFragment() {
