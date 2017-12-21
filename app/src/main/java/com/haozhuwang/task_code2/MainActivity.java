@@ -79,17 +79,23 @@ public class MainActivity extends FragmentActivity {
     private void switchFragment(Fragment from, Fragment to) {
         if (from != to) {
             mContent = to;
-            //打到管理器
+            //打开管理器
             FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
             if (!to.isAdded()) {
                 //没有被添加
-                if (to != null) {
-                    ft.add(R.id.fl_content, mContent).commit();
+                if (from != null) {
+                  ft.hide(from);
+                }
+                if (to !=null){
+                 ft.add(R.id.fl_content,to).commit();
                 }
             } else {
-                //已经被添加
-                if(!to.isAdded()){
-                    ft.show(mContent).commit();
+                //已经被添加.from隐藏
+                if (from != null) {
+                    ft.hide(from);
+                }
+                if (to !=null){
+                    ft.show(to).commit();
                 }
             }
         }
